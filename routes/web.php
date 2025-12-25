@@ -78,4 +78,20 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/user/update/{id}/{hash}', [App\Http\Controllers\Admin\UserController::class, 'update'])->name('user.update');
     Route::get('/user/delete/{id}/{hash}', [App\Http\Controllers\Admin\UserController::class, 'delete'])->name('user.delete');
 
+
+    // Student Entry Routes
+    Route::get('/studententries/schoollist', [App\Http\Controllers\StudentEntry\SchoolListController::class, 'index'])->name('schoollist.index');
+
+    Route::get('/studententries/schoolyear/{school_id}', [App\Http\Controllers\StudentEntry\SchoolYearController::class, 'index'])->name('schoolyear.index');
+    Route::post('/studententries/schoolyear/{school_id}/store', [App\Http\Controllers\StudentEntry\SchoolYearController::class, 'store'])->name('schoolyear.store');
+    Route::get('/studententries/schoolyear/edit/{id}/{hash}', [App\Http\Controllers\StudentEntry\SchoolYearController::class, 'edit'])->name('schoolyear.edit');
+    Route::post('/studententries/schoolyear/update/{id}/{hash}', [App\Http\Controllers\StudentEntry\SchoolYearController::class, 'update'])->name('schoolyear.update');
+    Route::get('/studententries/schoolyear/delete/{id}/{hash}', [App\Http\Controllers\StudentEntry\SchoolYearController::class, 'delete'])->name('schoolyear.delete');
+
+    Route::get('/studententries/student/{school_year_id}', [App\Http\Controllers\StudentEntry\StudentController::class, 'index'])->name('student.index');
+    Route::post('/studententries/student/{school_year_id}/store', [App\Http\Controllers\StudentEntry\StudentController::class, 'store'])->name('student.store');
+    Route::get('/studententries/student/edit/{id}/{hash}', [App\Http\Controllers\StudentEntry\StudentController::class, 'edit'])->name('student.edit');
+    Route::post('/studententries/student/update/{id}/{hash}', [App\Http\Controllers\StudentEntry\StudentController::class, 'update'])->name('student.update');
+    Route::get('/studententries/student/delete/{id}/{hash}', [App\Http\Controllers\StudentEntry\StudentController::class, 'delete'])->name('student.delete');
+
 });
