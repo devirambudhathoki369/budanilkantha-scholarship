@@ -15,5 +15,16 @@ class AcademicYear extends Model
         'academic_year',
         'start_date',
         'end_date',
+        'is_current',
     ];
+
+    public function schoolYears()
+    {
+        return $this->hasMany(SchoolYear::class);
+    }
+
+    public function students()
+    {
+        return $this->hasMany(Student::class);
+    }
 }

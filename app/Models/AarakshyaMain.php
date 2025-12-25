@@ -15,4 +15,9 @@ class AarakshyaMain extends Model
         'title',
         'percentage',
     ];
+
+    public function students()
+    {
+        return $this->hasMany(Student::class);
+    }
 }

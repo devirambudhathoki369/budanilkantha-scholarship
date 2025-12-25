@@ -25,9 +25,10 @@ Route::prefix('auth')->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-// Dashboard - Route through controller instead of view
-    Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])
-        ->name('dashboard');
+    // Dashboard Routes
+    Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard/academic-year/{academic_year_id}/schools', [App\Http\Controllers\DashboardController::class, 'academicYearSchools'])->name('dashboard.academic-year-schools');
+    Route::get('/dashboard/school-students/{school_year_id}', [App\Http\Controllers\DashboardController::class, 'schoolStudents'])->name('dashboard.school-students');
 
     // User Routes
     Route::prefix('dataentry/user')->name('user.')->group(function () {
