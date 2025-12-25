@@ -15,6 +15,7 @@ class Student extends Model
         'school_id',
         'academic_year_id',
         'school_year_id',
+        'class_id',
         'student_name',
         'address',
         'parent_name',
@@ -48,5 +49,10 @@ class Student extends Model
     public function aarakshyaMain()
     {
         return $this->belongsTo(AarakshyaMain::class);
+    }
+
+    public function classes()
+    {
+        return $this->belongsTo(Classes::class, 'class_id');
     }
 }

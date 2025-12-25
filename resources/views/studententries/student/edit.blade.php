@@ -34,7 +34,7 @@
                                         @csrf
                                         <div class="row">
 
-                                            <div class="col-md-6 mb-3">
+                                            <div class="col-md-4 mb-3">
                                                 <div class="form-floating">
                                                     <input id="student_name" type="text"
                                                         class="form-control @error('student_name') is-invalid @enderror"
@@ -47,7 +47,26 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-6 mb-3">
+                                            <div class="col-md-4 mb-3">
+                                                <div class="form-floating">
+                                                    <select id="class_id" name="class_id"
+                                                        class="form-select @error('class_id') is-invalid @enderror" required>
+                                                        <option value="">कक्षा छान्नुहोस्</option>
+                                                        @foreach($classes as $class)
+                                                            <option value="{{ $class->id }}"
+                                                                {{ old('class_id', $student->class_id) == $class->id ? 'selected' : '' }}>
+                                                                {{ $class->class }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                    <label for="class_id">कक्षा <span class="text-danger">*</span></label>
+                                                    @error('class_id')
+                                                        <span class="invalid-feedback">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 mb-3">
                                                 <div class="form-floating">
                                                     <input id="address" type="text"
                                                         class="form-control @error('address') is-invalid @enderror"

@@ -139,7 +139,8 @@
                                     <th width="15%">विद्यार्थीको नाम</th>
                                     <th width="10%">ठेगाना</th>
                                     <th width="10%">सम्पर्क नं.</th>
-                                    <th width="8%">EMIS नं.</th>
+                                    <th width="4%">EMIS नं.</th>
+                                    <th width="4%">कक्षा</th>
                                     <th width="10%">छात्रवृत्ति प्रकार</th>
                                     <th width="12%">आरक्षण/विद्यालय प्रकार</th>
                                     <th width="8%">GPA</th>
@@ -159,6 +160,7 @@
                                         <td>{{ $student->address }}</td>
                                         <td>{{ $student->contact_no }}</td>
                                         <td>{{ $student->emis_no }}</td>
+                                        <td>{{ $student->classes->class ?? '-' }}</td>
                                         <td>
                                             @if($student->scholarship_type == 'from_aarakshyan')
                                                 <span class="badge bg-warning">आरक्षणबाट</span>
@@ -228,7 +230,7 @@
                     @csrf
                     <div class="modal-body">
                         <div class="row">
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-4 mb-3">
                                 <div class="form-floating">
                                     <input id="student_name" type="text"
                                         class="form-control @error('student_name') is-invalid @enderror"
@@ -241,7 +243,26 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6 mb-3">
+                            <!-- I need to field for class selection -->
+                            <div class="col-md-4 mb-3">
+                                <div class="form-floating">
+                                    <select id="class_id" name="class_id"
+                                        class="form-select @error('class_id') is-invalid @enderror" required>
+                                        <option value="">कक्षा छान्नुहोस्</option>
+                                        @foreach($classes as $class)
+                                            <option value="{{ $class->id }}" {{ old('class_id') == $class->id ? 'selected' : '' }}>
+                                                {{ $class->class }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    <label for="class_id">कक्षा <span class="text-danger">*</span></label>
+                                    @error('class_id')
+                                        <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 mb-3">
                                 <div class="form-floating">
                                     <input id="address" type="text"
                                         class="form-control @error('address') is-invalid @enderror"

@@ -50,7 +50,7 @@
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="{{ route('schoollist.index') }}">
                         <i class="mdi mdi-school"></i>
                         <span data-key="t-trainingmanagement">विद्यार्थी विवरण</span>
                     </a>

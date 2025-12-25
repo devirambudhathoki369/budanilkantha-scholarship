@@ -4,6 +4,7 @@ namespace App\Http\Controllers\StudentEntry;
 
 use App\Http\Controllers\Controller;
 use App\Models\Student;
+use App\Models\Classes;
 use App\Models\SchoolYear;
 use App\Models\AarakshyaMain;
 use Illuminate\Http\Request;
@@ -28,6 +29,7 @@ class StudentController extends Controller
 
         $students = $query->get();
         $aarakshyaMains = AarakshyaMain::all();
+        $classes = Classes::all();
 
         // Count students by scholarship type
         $aarakshyanCount = Student::where('school_year_id', $school_year_id)
@@ -43,7 +45,8 @@ class StudentController extends Controller
             'students',
             'aarakshyaMains',
             'aarakshyanCount',
-            'examCount'
+            'examCount',
+            'classes'
         ));
     }
 
@@ -53,6 +56,7 @@ class StudentController extends Controller
 
         $request->validate([
             'student_name' => 'required|string|max:255',
+            'class_id' => 'required|exists:classes,id',
             'address' => 'nullable|string|max:255',
             'parent_name' => 'nullable|string|max:255',
             'contact_no' => 'nullable|string|max:255',
@@ -106,7 +110,7 @@ class StudentController extends Controller
             }
 
             // Convert entrance exam marks to max 60
-            $entrance_exam_converted = ($request->entrance_exam_marks / 100) * 60;
+            $entrance_exam_converted = ($request->entrance_exam_marks / 40) * 60;
 
             $data['total_marks'] = $school_type_marks + $gpa_marks + $entrance_exam_converted;
         } else {
@@ -137,8 +141,9 @@ class StudentController extends Controller
 
         $schoolYear = SchoolYear::with(['school', 'academicYear'])->findOrFail($student->school_year_id);
         $aarakshyaMains = AarakshyaMain::all();
+        $classes = Classes::all();
 
-        return view('studententries.student.edit', compact('student', 'schoolYear', 'aarakshyaMains'));
+        return view('studententries.student.edit', compact('student', 'schoolYear', 'aarakshyaMains', 'classes'));
     }
 
     public function update(Request $request, $id, $hash)
@@ -153,6 +158,7 @@ class StudentController extends Controller
 
         $request->validate([
             'student_name' => 'required|string|max:255',
+            'class_id' => 'required|exists:classes,id',
             'address' => 'nullable|string|max:255',
             'parent_name' => 'nullable|string|max:255',
             'contact_no' => 'nullable|string|max:255',
