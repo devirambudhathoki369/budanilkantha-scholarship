@@ -95,4 +95,20 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/studententries/student/update/{id}/{hash}', [App\Http\Controllers\StudentEntry\StudentController::class, 'update'])->name('student.update');
     Route::get('/studententries/student/delete/{id}/{hash}', [App\Http\Controllers\StudentEntry\StudentController::class, 'delete'])->name('student.delete');
 
+
+    // Report Routes
+Route::prefix('reports')->name('reports.')->group(function () {
+    // Academic Year Reports
+    Route::get('/academic-year-reports', [App\Http\Controllers\Reports\AcademicYearReportController::class, 'index'])->name('academic-year-reports.index');
+    Route::get('/academic-year-reports/students/{school_year_id}', [App\Http\Controllers\Reports\AcademicYearReportController::class, 'schoolStudents'])->name('academic-year-reports.students');
+
+    // Aarakshyan Reports
+    Route::get('/aarakshyan-reports', [App\Http\Controllers\Reports\AarakshyanReportController::class, 'index'])->name('aarakshyan-reports.index');
+    Route::get('/aarakshyan-reports/students/{school_year_id}/{aarakshya_main_id}', [App\Http\Controllers\Reports\AarakshyanReportController::class, 'schoolStudents'])->name('aarakshyan-reports.students');
+
+    // Scholarship Type Reports
+    Route::get('/scholarship-type-reports', [App\Http\Controllers\Reports\ScholarshipTypeReportController::class, 'index'])->name('scholarship-type-reports.index');
+    Route::get('/scholarship-type-reports/students/{school_year_id}/{scholarship_type}', [App\Http\Controllers\Reports\ScholarshipTypeReportController::class, 'schoolStudents'])->name('scholarship-type-reports.students');
+});
+
 });

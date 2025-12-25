@@ -56,6 +56,30 @@
                     </a>
                 </li>
 
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow">
+                        <i class="mdi mdi-cookie-settings"></i>
+                        <span data-key="t-apps"> प्रतिवेदन </span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li>
+                            <a href="{{ route('reports.academic-year-reports.index') }}">
+                                <span data-key="t-office">शैक्षिक सत्रअनुसार प्रतिवेदन</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('reports.aarakshyan-reports.index') }}">
+                                <span data-key="t-office">आरक्षण अनुसार प्रतिवेदन</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('reports.scholarship-type-reports.index') }}">
+                                <span data-key="t-office">छात्रवृत्ति प्रकार अनुसार प्रतिवेदन</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
             </ul>
         </div>
         <!-- Sidebar -->
